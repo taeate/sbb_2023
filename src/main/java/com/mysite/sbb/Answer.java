@@ -19,6 +19,6 @@ public class Answer {
 
     private LocalDateTime createDate;
 
-    @ManyToOne
+    @ManyToOne // Question 1개에 답변이 여러개니까 ManyToOne
     private Question question;
 }
