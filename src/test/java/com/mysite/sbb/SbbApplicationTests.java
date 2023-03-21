@@ -82,5 +82,17 @@ class SbbApplicationTests {
 			assertEquals("sbb가 무엇인가요?", q.getSubject());
 		}
 	}
+	 /*
+    SQL
+    SELECT *
+    FROM question
+    WHERE subject = 'sbb가 무엇인가요?'
+    */
+	 @Test
+	 @DisplayName("findBySubject")
+	 void t004() {
+		 Question q = questionRepository.findBySubject("sbb가 무엇인가요?");
+		 assertEquals(1, q.getId());
+	 }
 
 }
