@@ -4,6 +4,7 @@ import com.mysite.sbb.answer.Answer;
 import com.mysite.sbb.answer.AnswerRepository;
 import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionRepository;
+import com.mysite.sbb.question.QuestionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class SbbApplicationTests {
 	@Autowired
 	private QuestionRepository questionRepository;
+	@Autowired
+	private QuestionService questionService;
 	@Autowired
 	private AnswerRepository answerRepository;
 	@BeforeEach
@@ -170,6 +173,16 @@ class SbbApplicationTests {
 		assertTrue(oa.isPresent());
 		Answer a = oa.get();
 		assertEquals(2, a.getQuestion().getId());
+	}
+
+	@Test
+	@DisplayName("대량 테스트 데이터")
+	void testJpa(){
+		   for (int i = 1; i <= 300; i++) {
+			   String subject = String.format("테스트 데이터입니다:[%03d]",i);
+			   String content = "내용없음";
+			   this.questionService.create(subject,content);
+		   }
 	}
 
 }
